@@ -45,3 +45,55 @@ README.md: A detailed README for the generated calculator project.
 <img width="2560" height="1664" alt="image" src="https://github.com/user-attachments/assets/7af5d76e-6f77-4c9d-996a-b51dca445dbd" />
 
 
+# ⚙️ Installation
+**1. Clone the Repository**
+git clone https://github.com/maharshipandya3006/AgenticAI_ProjectBuilder.git
+
+cd AgenticAI_ProjectBuilder
+
+**2. Set Up the Environment**
+
+Create a virtual environment and install dependencies using uv:
+
+uv venv
+
+source .venv/bin/activate
+
+uv pip install -r pyproject.toml
+
+**3. Configure API Key**
+
+Create a .env file in the root directory and add your Groq API key:
+
+GROQ_API_KEY="your-groq-api-key"
+
+**▶️ Running the Agent**
+1. Execute the Main Script
+
+python main.py
+
+2. Provide Your Prompt
+
+When prompted, enter a description of the project you want to generate:
+
+Enter your project prompt: a simple web-based calculator using HTML, CSS, and JavaScript.
+
+3. Check the Output
+   
+The agent will automatically begin the planning and coding process
+
+All generated files will be stored in the:
+
+generated_project/
+
+**📁 Project Structure.**
+
+├── agent/                # Core agent logic
+│   ├── graph.py          # LangGraph state machine and agent nodes
+│   ├── prompts.py        # Prompts for each agent
+│   ├── states.py         # Pydantic models for graph state
+│   └── tools.py          # Tools for the Coder agent (file I/O, commands)
+├── generated_project/    # Output directory for generated code
+├── main.py               # Entry point to run the agent
+└── pyproject.toml        # Project dependencies
+
