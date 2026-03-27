@@ -2,6 +2,10 @@
 
 A lightweight web-based calculator that performs basic arithmetic operations directly in the browser. No build steps or server required—just open the HTML file.
 
+<img width="2560" height="1664" alt="image" src="https://github.com/user-attachments/assets/81e9e4a0-9503-4756-8254-020e347896d4" />
+<img width="2560" height="1664" alt="image" src="https://github.com/user-attachments/assets/323f972c-35ce-431e-a5be-624f7e0818cc" />
+
+
 ## Setup
 
 1. Clone or download the repository.
