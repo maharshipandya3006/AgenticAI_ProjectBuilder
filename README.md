@@ -5,10 +5,15 @@ AgenticAI ProjectBuilder is a multi-agent system designed to automate the creati
 
 # 🛠️ Tech Stack
 Python
+
 LangChain
+
 LangGraph
+
 Groq API (ChatGroq – openai/gpt-oss-120b)
+
 Pydantic
+
 ReAct Agents
 
 # 🏗️ Architecture
