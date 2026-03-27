@@ -1,0 +1,126 @@
+/* Calculator UI Styles */
+:root {
+  /* Colors */
+  --color-bg: #f5f7fa;
+  --color-primary: #222;
+  --color-secondary: #555;
+  --color-button-bg: #e0e0e0;
+  --color-button-hover: #d5d5d5;
+  --color-button-active: #c0c0c0;
+  --color-operator-bg: #ff9500;
+  --color-operator-hover: #e58a00;
+  --color-action-bg: #ff3b30;
+  --color-action-hover: #e03228;
+  --color-display-bg: #fff;
+  --color-display-text: #000;
+  /* Sizing */
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --spacing: 0.5rem;
+  --button-size: 3rem;
+  --font-size: 1rem;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  background: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#calculator {
+  background: #fff;
+  max-width: 400px;
+  width: 90vw;
+  padding: calc(var(--spacing) * 2);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
+}
+
+.display {
+  background: var(--color-display-bg);
+  color: var(--color-display-text);
+  font-size: 1.5rem;
+  text-align: right;
+  padding: var(--spacing);
+  border-radius: 0.5rem;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing);
+}
+
+button {
+  height: var(--button-size);
+  font-size: 1.2rem;
+  background: var(--color-button-bg);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover,
+button:focus {
+  background: var(--color-button-hover);
+  outline: none;
+}
+
+button:active {
+  background: var(--color-button-active);
+}
+
+/* Operator buttons */
+button[data-key="+"] ,
+button[data-key="-"] ,
+button[data-key="*"] ,
+button[data-key="/"] {
+  background: var(--color-operator-bg);
+  color: #fff;
+}
+
+button[data-key="+"]:hover,
+button[data-key="-"]:hover,
+button[data-key="*"]:hover,
+button[data-key="/"]:hover,
+button[data-key="+"]:focus,
+button[data-key="-"]:focus,
+button[data-key="*"]:focus,
+button[data-key="/"]:focus {
+  background: var(--color-operator-hover);
+}
+
+/* Action buttons (clear, backspace, equals) */
+button[data-action] {
+  background: var(--color-action-bg);
+  color: #fff;
+}
+
+button[data-action]:hover,
+button[data-action]:focus {
+  background: var(--color-action-hover);
+}
+
+@media (max-width: 350px) {
+  :root {
+    --font-size: 0.85rem;
+    --spacing: 0.3rem;
+    --button-size: 2.5rem;
+  }
+  .display {
+    font-size: 1.2rem;
+    padding: var(--spacing);
+  }
+}

@@ -1,0 +1,6 @@
+# Core dependencies
+Flask>=2.0,<3.0
+requests>=2.28.1
+
+# Optional dependencies (uncomment if needed)
+# openai>=0.27.0  # Required only for OpenAI integration
