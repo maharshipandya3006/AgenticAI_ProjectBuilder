@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 from langchain_groq.chat_models import ChatGroq
 from langgraph.constants import END
 from langgraph.graph import StateGraph
-from langgraph.prebuilt import create_react_agent   # <-- unchanged, works
+from langgraph.prebuilt import create_react_agent
 from langchain_core.messages import SystemMessage
 from typing import TypedDict, Optional
 
@@ -17,10 +17,6 @@ from agent.tools import (
     run_cmd,
     init_project_root
 )
-
-# ----------------------------------------------------------------------
-# Define a typed state for the graph
-# ----------------------------------------------------------------------
 class GraphState(TypedDict):
     user_prompt: str
     plan: Optional[Plan]
@@ -28,9 +24,6 @@ class GraphState(TypedDict):
     coder_state: Optional[CoderState]
     status: Optional[str]
 
-# ----------------------------------------------------------------------
-# Setup
-# ----------------------------------------------------------------------
 _ = load_dotenv()
 init_project_root()
 
@@ -45,16 +38,12 @@ coder_tools = [
     run_cmd
 ]
 
-# ✅ Use the working version
 react_agent = create_react_agent(
     llm,
     coder_tools,
     prompt=SystemMessage(coder_system_prompt())
 )
 
-# ----------------------------------------------------------------------
-# Node functions
-# ----------------------------------------------------------------------
 def planner_agent(state: GraphState) -> dict:
     """Converts user prompt into a structured Plan."""
     user_prompt = state["user_prompt"]
@@ -65,7 +54,7 @@ def planner_agent(state: GraphState) -> dict:
 
 def architect_agent(state: GraphState) -> dict:
     """Creates TaskPlan from Plan."""
-    plan: Plan = state["plan"]  # type: ignore
+    plan: Plan = state["plan"]
     resp = llm.with_structured_output(TaskPlan).invoke(
         architect_prompt(plan=plan.model_dump_json())
     )
@@ -79,7 +68,7 @@ def coder_agent(state: GraphState) -> dict:
     """LangGraph tool-using coder agent."""
     coder_state = state.get("coder_state")
     if coder_state is None:
-        coder_state = CoderState(task_plan=state["task_plan"], current_step_idx=0)  # type: ignore
+        coder_state = CoderState(task_plan=state["task_plan"], current_step_idx=0)
 
     steps = coder_state.task_plan.implementation_steps
     if coder_state.current_step_idx >= len(steps):
@@ -87,7 +76,6 @@ def coder_agent(state: GraphState) -> dict:
 
     current_task = steps[coder_state.current_step_idx]
 
-    # Read existing file content (if any)
     existing_content = read_file.invoke({"path": current_task.filepath})
 
     user_prompt = (
@@ -98,19 +86,16 @@ def coder_agent(state: GraphState) -> dict:
         "Use write_file(path, content) to save."
     )
 
-    # Invoke the agent and capture the result
+
     result = react_agent.invoke({
         "messages": [{"role": "user", "content": user_prompt}]
     })
 
-    # (optional) inspect result["messages"] for errors or final answer
 
     coder_state.current_step_idx += 1
     return {"coder_state": coder_state}
 
-# ----------------------------------------------------------------------
-# Build the graph
-# ----------------------------------------------------------------------
+
 graph = StateGraph(GraphState)
 
 graph.add_node("planner", planner_agent)

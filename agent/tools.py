@@ -17,7 +17,6 @@ def safe_path_for_project(path: str) -> pathlib.Path:
 @tool
 def write_file(path: str, content: str) -> str:
     """Writes content to a file at the specified path within the project root."""
-    # 🔒 HARD LIMIT (prevents JSON crashes)
     max_len = 12000
     if len(content) > max_len:
         content = content[:max_len]
@@ -57,7 +56,6 @@ def list_files(directory: str = ".") -> str:
     return "\n".join(files) if files else "No files found."
 
 
-# ✅ FIX: Alias to prevent LLM tool-name mismatch
 @tool
 def list_file(directory: str = ".") -> str:
     """Alias for list_files. Lists all files in a directory."""
