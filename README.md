@@ -44,23 +44,3 @@ README.md: A detailed README for the generated calculator project.
 
 <img width="2560" height="1664" alt="image" src="https://github.com/user-attachments/assets/7af5d76e-6f77-4c9d-996a-b51dca445dbd" />
 
-
-
-**📁 Project Structure.**
-
-├── agent/                # Core agent logic
-
-│   ├── graph.py          # LangGraph state machine and agent nodes
-
-│   ├── prompts.py        # Prompts for each agent
-
-│   ├── states.py         # Pydantic models for graph state
-
-│   └── tools.py          # Tools for the Coder agent (file I/O, commands)
-
-├── generated_project/    # Output directory for generated code
-
-├── main.py               # Entry point to run the agent
-
-└── pyproject.toml        # Project dependencies
-
